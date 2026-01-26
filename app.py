@@ -81,5 +81,5 @@ with tab2:
         col1.subheader("最大死亡率")
         col1.metric(f"死因:{max_cause.index[0]}", f"{max_rate:.2f}")
 
-        col2.subheader("最大死亡率")
+        col2.subheader("最小死亡率")
         col2.metric(f"死因:{min_cause.index[0]}", f"{min_rate:.2f}")
