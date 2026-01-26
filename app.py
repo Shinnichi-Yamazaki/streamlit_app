@@ -4,9 +4,10 @@ import matplotlib.pyplot as plt
 
 df=pd.read_csv("死因順位別にみた年次別死亡率（人口10万対）.csv",encoding="cp932")
 with st.sidebar:
-    option=st.toggle("年別にみる")
+    option=st.selectbox('表示方法を選択してください',
+                        ["年別にみる","死因別にみる"])
     st.subheader("絞り込み条件")
-    if option==True:
+    if option=="年別にみる":
         year = st.selectbox('年を選んでください',
                           df["年次"].unique())
         df = df[df["年次"]==year]
@@ -18,10 +19,12 @@ with st.sidebar:
                 "死亡率":df[f"第{i}位死亡率"].values[0]
                 })
 
-        result_df = pd.DataFrame(rows)
+        df = pd.DataFrame(rows)
 
-        result_df.set_index("死因",inplace=True)
+        df.set_index("死因",inplace=True)
 
-if option==True:
-    st.dataframe(result_df,width=800,height=220)
-    st.bar_chart(result_df)
+if option=="年別にみる":
+    table=st.toggle("表を表示")
+    if table==True:
+        st.dataframe(df,width=800,height=220)
+    st.bar_chart(df)
