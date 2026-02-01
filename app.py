@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 
 df=pd.read_csv("death_rate_by_cause_1950_2024.csv",encoding="cp932")
 
