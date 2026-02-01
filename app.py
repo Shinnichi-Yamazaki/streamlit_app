@@ -3,13 +3,20 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 df=pd.read_csv("死因順位別にみた年次別死亡率（人口10万対）.csv",encoding="cp932")
+
+st.title("死因別死亡率可視化アプリ(1950~2024)")
+st.write("　このアプリでは、1950年から2024年までの日本における死因別死亡率データを可視化・分析することができます。対象となるデータは、各年の死因上位10位の死亡率（人口10万人対）です。")
 tab1,tab2=st.tabs(["グラフ・表","数値"])
 with st.sidebar:
     
     option=st.selectbox('表示方法を選択してください',
                         ["年別にみる","死因別にみる"])
-    st.subheader("絞り込み条件")
+
     if option=="年別にみる":
+        st.write("年を1つ選択すると、その年における死因上位10位とそれぞれの死亡率が表示されます。表示切替ボタンを使うことで、表形式と棒グラフの両方で確認できます。また、最大・最小の死亡率と対応する死因も自動的に表示されます。")
+
+        st.subheader("絞り込み条件")
+
         year = st.selectbox('年を選んでください',
                         df["年次"].unique())
         df = df[df["年次"]==year]
@@ -25,6 +32,8 @@ with st.sidebar:
         df.set_index("死因",inplace=True)
     
     if option=="死因別にみる":
+
+        st.write("特定の死因を選択すると、1950年から2024年までの死亡率の推移を確認できます。表示切替ボタンにより、表形式または折れ線グラフで時系列変化を確認できます。さらに、最大値・最小値・平均値といった基本的な統計量も表示されます。")
         records = []
 
         years = df["年次"]
@@ -41,6 +50,7 @@ with st.sidebar:
                 })
 
         df = pd.DataFrame(records)
+        st.subheader("絞り込み条件")
 
         cause = st.selectbox('死因を選択してください',
                         df["死因"].unique())
