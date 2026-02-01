@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df=pd.read_csv("死因順位別にみた年次別死亡率（人口10万対）.csv",encoding="cp932")
+df=pd.read_csv("death_rate_by_cause_1950_2024.csv",encoding="cp932")
 
 st.title("死因別死亡率可視化アプリ(1950~2024)")
 st.write("　このアプリでは、1950年から2024年までの日本における死因別死亡率データを可視化・分析することができます。対象となるデータは、各年の死因上位10位の死亡率（人口10万人対）です。")
